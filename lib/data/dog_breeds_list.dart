@@ -14,15 +14,27 @@ class DogBreedsList {
   Map<String, List<String>> message;
   @JsonKey(name: "status")
   String status;
+  @JsonKey(name: "code")
+  int? code;
 
   DogBreedsList({
     required this.message,
     required this.status,
+    this.code,
   });
 
   factory DogBreedsList.fromJson(Map<String, dynamic> json) =>
-      _$DogsBreedListFromJson(json);
+      _$DogBreedsListFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DogsBreedListToJson(this);
+  Map<String, dynamic> toJson() => _$DogBreedsListToJson(this);
+
   List<String> get breedList => message.keys.toList()..sort();
+  Map<String, List<String>> get groupedBreeds {
+    final groupedBreeds = <String, List<String>>{};
+    for (final breed in breedList) {
+      final firstLetter = breed[0].toUpperCase();
+      groupedBreeds.putIfAbsent(firstLetter, () => []).add(breed);
+    }
+    return groupedBreeds;
+  }
 }

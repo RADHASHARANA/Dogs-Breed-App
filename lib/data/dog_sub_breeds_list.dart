@@ -15,10 +15,12 @@ class DogSubBreedsList {
   List<String> message;
   @JsonKey(name: "status")
   String status;
-
+  @JsonKey(name: "code")
+  int? code;
   DogSubBreedsList({
     required this.message,
     required this.status,
+    this.code,
   });
 
   factory DogSubBreedsList.fromJson(Map<String, dynamic> json) =>

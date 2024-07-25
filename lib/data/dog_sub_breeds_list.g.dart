@@ -11,10 +11,12 @@ DogSubBreedsList _$DogSubBreedsListFromJson(Map<String, dynamic> json) =>
       message:
           (json['message'] as List<dynamic>).map((e) => e as String).toList(),
       status: json['status'] as String,
+      code: json['code'] as int?,
     );
 
 Map<String, dynamic> _$DogSubBreedsListToJson(DogSubBreedsList instance) =>
     <String, dynamic>{
       'message': instance.message,
       'status': instance.status,
+      'code': instance.code,
     };

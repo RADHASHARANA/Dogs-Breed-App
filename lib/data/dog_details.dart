@@ -15,12 +15,12 @@ class DogImageDetails {
   @JsonKey(name: "message")
   String message;
   @JsonKey(name: "code")
-  int code;
+  int? code;
 
   DogImageDetails({
     required this.status,
     required this.message,
-    required this.code,
+    this.code,
   });
 
   factory DogImageDetails.fromJson(Map<String, dynamic> json) =>

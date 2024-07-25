@@ -13,19 +13,20 @@ class DogBreedsRepoImpl implements DogBreedsRepo {
       : _dioServices = dioServices;
 
   @override
-  Future<ApiResult<List<String>>> fetchDogBreedsList() {
+  Future<ApiResult<Map<String, List<String>>>> fetchDogBreedsList() {
     return _requestHandler.handle(request: () async {
       final response = await _dioServices.get(EndPoints.dogBreeds.breedList);
       final model = DogBreedsList.fromJson(response.data);
-      return model.breedList;
+      return model.groupedBreeds;
     });
   }
 
   @override
   Future<ApiResult<DogImageDetails>> fetchDogImageDetails(
-      {required String breed}) {
+      {required String breedName}) {
     return _requestHandler.handle(request: () async {
-      final response = await _dioServices.get(EndPoints.dogBreeds.breedList);
+      final String endPoints = 'breed/$breedName/images/random';
+      final response = await _dioServices.get(endPoints);
       final model = DogImageDetails.fromJson(response.data);
       return model;
     });
@@ -33,9 +34,10 @@ class DogBreedsRepoImpl implements DogBreedsRepo {
 
   @override
   Future<ApiResult<List<String>>> fetchDogSubBreedsList(
-      {required String breed}) {
+      {required String breedName}) {
     return _requestHandler.handle(request: () async {
-      final response = await _dioServices.get(EndPoints.dogBreeds.breedList);
+      final String endPoints = 'breed/$breedName/list';
+      final response = await _dioServices.get(endPoints);
       final model = DogSubBreedsList.fromJson(response.data);
       return model.message;
     });

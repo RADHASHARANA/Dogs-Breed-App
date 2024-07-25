@@ -10,7 +10,7 @@ DogImageDetails _$DogImageDetailsFromJson(Map<String, dynamic> json) =>
     DogImageDetails(
       status: json['status'] as String,
       message: json['message'] as String,
-      code: json['code'] as int,
+      code: json['code'] as int?,
     );
 
 Map<String, dynamic> _$DogImageDetailsToJson(DogImageDetails instance) =>
