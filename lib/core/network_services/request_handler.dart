@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_networking/core/network_services/api_result.dart';
-import 'package:flutter_networking/core/network_services/network_exception.dart';
 
 class RequestHandler {
   RequestHandler();
@@ -10,8 +9,9 @@ class RequestHandler {
       final result = await request.call();
       return ApiResult.success(data: result);
     } on DioException catch (e) {
-      final error = NetworkExceptions.fromDioError(e);
-      return ApiResult.failure(error: error);
+      return ApiResult.failure(error: e);
+    } catch (e) {
+      return ApiResult.error(e.toString());
     }
   }
 }

@@ -19,19 +19,19 @@ mixin _$ApiResult<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(NetworkExceptions error) failure,
+    required TResult Function(DioException error) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? success,
-    TResult? Function(NetworkExceptions error)? failure,
+    TResult? Function(DioException error)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(NetworkExceptions error)? failure,
+    TResult Function(DioException error)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -148,7 +148,7 @@ class _$SuccessImpl<T> extends Success<T> with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(NetworkExceptions error) failure,
+    required TResult Function(DioException error) failure,
   }) {
     return success(data);
   }
@@ -157,7 +157,7 @@ class _$SuccessImpl<T> extends Success<T> with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? success,
-    TResult? Function(NetworkExceptions error)? failure,
+    TResult? Function(DioException error)? failure,
   }) {
     return success?.call(data);
   }
@@ -166,7 +166,7 @@ class _$SuccessImpl<T> extends Success<T> with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(NetworkExceptions error)? failure,
+    TResult Function(DioException error)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -223,7 +223,7 @@ abstract class _$$FailureImplCopyWith<T, $Res> {
           _$FailureImpl<T> value, $Res Function(_$FailureImpl<T>) then) =
       __$$FailureImplCopyWithImpl<T, $Res>;
   @useResult
-  $Res call({NetworkExceptions error});
+  $Res call({DioException error});
 }
 
 /// @nodoc
@@ -243,7 +243,7 @@ class __$$FailureImplCopyWithImpl<T, $Res>
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as NetworkExceptions,
+              as DioException,
     ));
   }
 }
@@ -254,7 +254,7 @@ class _$FailureImpl<T> extends Failure<T> with DiagnosticableTreeMixin {
   const _$FailureImpl({required this.error}) : super._();
 
   @override
-  final NetworkExceptions error;
+  final DioException error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -290,7 +290,7 @@ class _$FailureImpl<T> extends Failure<T> with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(NetworkExceptions error) failure,
+    required TResult Function(DioException error) failure,
   }) {
     return failure(error);
   }
@@ -299,7 +299,7 @@ class _$FailureImpl<T> extends Failure<T> with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? success,
-    TResult? Function(NetworkExceptions error)? failure,
+    TResult? Function(DioException error)? failure,
   }) {
     return failure?.call(error);
   }
@@ -308,7 +308,7 @@ class _$FailureImpl<T> extends Failure<T> with DiagnosticableTreeMixin {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(NetworkExceptions error)? failure,
+    TResult Function(DioException error)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -350,11 +350,10 @@ class _$FailureImpl<T> extends Failure<T> with DiagnosticableTreeMixin {
 }
 
 abstract class Failure<T> extends ApiResult<T> {
-  const factory Failure({required final NetworkExceptions error}) =
-      _$FailureImpl<T>;
+  const factory Failure({required final DioException error}) = _$FailureImpl<T>;
   const Failure._() : super._();
 
-  NetworkExceptions get error;
+  DioException get error;
   @JsonKey(ignore: true)
   _$$FailureImplCopyWith<T, _$FailureImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;

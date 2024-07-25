@@ -8,6 +8,8 @@ import '../bloc/dog_breeds_state.dart';
 import 'dog_subbreeds_list.dart';
 
 class DogBreedsScreen extends StatelessWidget {
+  const DogBreedsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -28,16 +30,13 @@ class DogBreedsView extends StatelessWidget {
       ),
       body: BlocBuilder<DogBreedsCubit, DogBreedsState>(
         builder: (context, state) {
-          if (state is DogBreedsListState) {
-            return StatusHandler(
-              status: state.dogBreedsListStatus,
-              onSuccess: BreedListWidget(
-                groupedBreeds: state.groupedBreeds,
-              ),
-              error: state.error,
-            );
-          }
-          return const SizedBox.shrink();
+          return StatusHandler(
+            status: state.dogBreedsListStatus,
+            onSuccess: BreedListWidget(
+              groupedBreeds: state.groupedBreeds,
+            ),
+            error: state.breedListerror,
+          );
         },
       ),
     );

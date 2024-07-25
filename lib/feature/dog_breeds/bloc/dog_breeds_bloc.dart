@@ -1,78 +1,87 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_networking/feature/dog_breeds/bloc/dog_breeds_state.dart';
 import 'package:flutter_networking/repository/dog_breeds_repo.dart';
-import '../../../core/network_services/api_result.dart';
-import '../../../data/dog_breeds.dart';
 import '../../common_widgets/status_handler.dart';
 
 class DogBreedsCubit extends Cubit<DogBreedsState> {
   DogBreedsCubit({required this.dogBreedsRepo})
-      : super(DogBreedsListInitial()); // Initial state is an empty list
+      : super(DogBreedsState.initial()); // Initial state is an empty list
   final DogBreedsRepo dogBreedsRepo;
 
   void fetchDogBreeds() async {
-    // Fetch dog breeds from your repository
-    emit(DogBreedsListState(dogBreedsListStatus: Status.loading));
+    emit(state.copyWith(dogBreedsListStatus: Status.loading));
     final result = await dogBreedsRepo.fetchDogBreedsList();
     if (result.isSuccess) {
+      if (result.data.isEmpty) {
+        emit(
+          state.copyWith(
+            dogBreedsListStatus: Status.empty,
+          ),
+        );
+        return;
+      }
       emit(
-        DogBreedsListState(
+        state.copyWith(
           dogBreedsListStatus: Status.success,
           groupedBreeds: result.data,
         ),
       ); // Update the state with the fetched breeds
     } else {
       emit(
-        DogBreedsListState(
+        state.copyWith(
           dogBreedsListStatus: Status.error,
-          error: result.error.toString(),
+          breedListerror: result.error.toString(),
         ),
       );
     }
   }
 
   void fetchDogSubBreeds(String breedName) async {
-    emit(DogBreedDetailsState(dogSubBreedsListStatus: Status.loading));
-    final subBreedsFuture =
-        dogBreedsRepo.fetchDogSubBreedsList(breedName: breedName);
-    final imageFuture =
-        dogBreedsRepo.fetchDogImageDetails(breedName: breedName);
+    emit(state.copyWith(dogSubBreedsListStatus: Status.loading));
+    final result =
+        await dogBreedsRepo.fetchDogSubBreedsList(breedName: breedName);
 
-    // Use Future.wait to execute both API calls concurrently
-    final results = await Future.wait([subBreedsFuture, imageFuture]);
-
-    final subBreedsResult = results[0] as ApiResult<List<String>>;
-    final imageResult = results[1] as ApiResult<DogImageDetails>;
-
-    if (subBreedsResult.isSuccess && imageResult.isSuccess) {
-      if (subBreedsResult.data.isEmpty) {
+    if (result.isSuccess) {
+      if (result.data.isEmpty) {
         emit(
-          DogBreedDetailsState(
+          state.copyWith(
             dogSubBreedsListStatus: Status.empty,
           ),
         );
         return;
       }
       emit(
-        DogBreedDetailsState(
+        state.copyWith(
           dogSubBreedsListStatus: Status.success,
-          dogSubBreedsList: subBreedsResult.data,
-          breedImageUrl: imageResult.data.message,
-        ),
-      );
-    } else if (subBreedsResult.isSuccess) {
-      emit(
-        DogBreedDetailsState(
-          dogSubBreedsListStatus: Status.success,
-          dogSubBreedsList: subBreedsResult.data,
-          breedImageUrl: '',
+          dogSubBreedsList: result.data,
         ),
       );
     } else {
       emit(
-        DogBreedDetailsState(
+        state.copyWith(
           dogSubBreedsListStatus: Status.error,
-          error: subBreedsResult.error.toString(),
+          subbreedListerror: result.error.toString(),
+        ),
+      );
+    }
+  }
+
+  void fetchDogImageDetails(String breedName) async {
+    emit(state.copyWith(dogImageStatus: Status.loading));
+    final result =
+        await dogBreedsRepo.fetchDogImageDetails(breedName: breedName);
+    if (result.isSuccess) {
+      emit(
+        state.copyWith(
+          dogImageStatus: Status.success,
+          breedImageUrl: result.data.message,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          dogImageStatus: Status.error,
+          subbreedListerror: result.error.toString(),
         ),
       );
     }

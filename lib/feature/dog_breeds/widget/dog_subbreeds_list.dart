@@ -4,6 +4,7 @@ import 'package:flutter_networking/feature/common_widgets/status_handler.dart';
 
 import '../bloc/dog_breeds_bloc.dart';
 import '../bloc/dog_breeds_state.dart';
+import 'dog_image_screen.dart';
 
 class DogBreedDetailsScreen extends StatelessWidget {
   const DogBreedDetailsScreen({super.key, required this.breedName});
@@ -16,16 +17,14 @@ class DogBreedDetailsScreen extends StatelessWidget {
       ),
       body: BlocBuilder<DogBreedsCubit, DogBreedsState>(
         builder: (context, state) {
-          if (state is DogBreedDetailsState) {
-            return StatusHandler(
-              status: state.dogSubBreedsListStatus,
-              onSuccess: SubBreedListWidget(
-                subBreeds: state.dogSubBreedsList,
-              ),
-              error: state.error,
-            );
-          }
-          return const SizedBox.shrink();
+          return StatusHandler(
+            status: state.dogSubBreedsListStatus,
+            onSuccess: SubBreedListWidget(
+              subBreeds: state.dogSubBreedsList,
+              breed: breedName,
+            ),
+            error: state.subbreedListerror,
+          );
         },
       ),
     );
@@ -36,9 +35,11 @@ class SubBreedListWidget extends StatelessWidget {
   const SubBreedListWidget({
     super.key,
     required this.subBreeds,
+    required this.breed,
   });
 
   final List<String> subBreeds;
+  final String breed;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,19 @@ class SubBreedListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(subBreeds[index]),
+          onTap: () {
+            context.read<DogBreedsCubit>().fetchDogImageDetails(breed);
+            final Widget child = BlocProvider<DogBreedsCubit>.value(
+              value: context.read<DogBreedsCubit>(),
+              child: DogImageScreen(breedName: breed),
+            );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => child,
+              ),
+            );
+          },
         );
       },
     );

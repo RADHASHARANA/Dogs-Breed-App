@@ -37,7 +37,7 @@ class StatusHandler extends StatelessWidget {
       case Status.error:
         return Center(child: Text(error ?? 'Server Error'));
       case Status.empty:
-        return Center(child: Text(error ?? 'No Breeds Found'));
+        return const Center(child: Text('No Breeds Found'));
     }
   }
 

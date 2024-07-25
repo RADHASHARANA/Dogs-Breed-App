@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_networking/core/network_services/network_exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -9,8 +10,11 @@ abstract class ApiResult<T> with _$ApiResult<T> {
 
   const factory ApiResult.success({required T data}) = Success<T>;
 
-  const factory ApiResult.failure({required NetworkExceptions error}) =
-      Failure<T>;
+  const factory ApiResult.failure({required DioException error}) = Failure<T>;
+
+  factory ApiResult.error(String error) => ApiResult.failure(
+      error:
+          DioException(error: error, requestOptions: RequestOptions(path: '')));
 
   bool get isSuccess => map(
         success: (_) => true,
@@ -22,7 +26,7 @@ abstract class ApiResult<T> with _$ApiResult<T> {
         failure: (data) => throw data.error,
       );
 
-  NetworkExceptions get error => map(
+  DioException get error => map(
         success: (_) => throw Exception('No error'),
         failure: (data) => data.error,
       );
