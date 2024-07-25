@@ -6,8 +6,8 @@ part of 'dog_breeds_list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DogsBreedList _$DogsBreedListFromJson(Map<String, dynamic> json) =>
-    DogsBreedList(
+DogBreedsList _$DogsBreedListFromJson(Map<String, dynamic> json) =>
+    DogBreedsList(
       message: (json['message'] as Map<String, dynamic>).map(
         (k, e) =>
             MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
@@ -15,7 +15,7 @@ DogsBreedList _$DogsBreedListFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String,
     );
 
-Map<String, dynamic> _$DogsBreedListToJson(DogsBreedList instance) =>
+Map<String, dynamic> _$DogsBreedListToJson(DogBreedsList instance) =>
     <String, dynamic>{
       'message': instance.message,
       'status': instance.status,

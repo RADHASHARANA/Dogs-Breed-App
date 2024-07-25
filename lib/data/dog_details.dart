@@ -3,13 +3,13 @@ import 'dart:convert';
 
 part 'dog_details.g.dart';
 
-DogDetails dogDetailsFromJson(String str) =>
-    DogDetails.fromJson(json.decode(str));
+DogImageDetails dogDetailsFromJson(String str) =>
+    DogImageDetails.fromJson(json.decode(str));
 
-String dogDetailsToJson(DogDetails data) => json.encode(data.toJson());
+String dogDetailsToJson(DogImageDetails data) => json.encode(data.toJson());
 
 @JsonSerializable()
-class DogDetails {
+class DogImageDetails {
   @JsonKey(name: "status")
   String status;
   @JsonKey(name: "message")
@@ -17,14 +17,14 @@ class DogDetails {
   @JsonKey(name: "code")
   int code;
 
-  DogDetails({
+  DogImageDetails({
     required this.status,
     required this.message,
     required this.code,
   });
 
-  factory DogDetails.fromJson(Map<String, dynamic> json) =>
-      _$DogDetailsFromJson(json);
+  factory DogImageDetails.fromJson(Map<String, dynamic> json) =>
+      _$DogImageDetailsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DogDetailsToJson(this);
+  Map<String, dynamic> toJson() => _$DogImageDetailsToJson(this);
 }

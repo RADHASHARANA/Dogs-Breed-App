@@ -1,3 +1,3 @@
 class BaseUrl {
-  static String get dogsBreed => 'https://dog.ceo/dog-api/';
+  static String get dogsBreed => 'https://dog.ceo/api/';
 }

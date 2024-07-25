@@ -3,25 +3,26 @@ import 'dart:convert';
 
 part 'dog_breeds_list.g.dart';
 
-DogsBreedList dogsBreedListFromJson(String str) =>
-    DogsBreedList.fromJson(json.decode(str));
+DogBreedsList dogsBreedListFromJson(String str) =>
+    DogBreedsList.fromJson(json.decode(str));
 
-String dogsBreedListToJson(DogsBreedList data) => json.encode(data.toJson());
+String dogsBreedListToJson(DogBreedsList data) => json.encode(data.toJson());
 
 @JsonSerializable()
-class DogsBreedList {
+class DogBreedsList {
   @JsonKey(name: "message")
   Map<String, List<String>> message;
   @JsonKey(name: "status")
   String status;
 
-  DogsBreedList({
+  DogBreedsList({
     required this.message,
     required this.status,
   });
 
-  factory DogsBreedList.fromJson(Map<String, dynamic> json) =>
+  factory DogBreedsList.fromJson(Map<String, dynamic> json) =>
       _$DogsBreedListFromJson(json);
 
   Map<String, dynamic> toJson() => _$DogsBreedListToJson(this);
+  List<String> get breedList => message.keys.toList()..sort();
 }
