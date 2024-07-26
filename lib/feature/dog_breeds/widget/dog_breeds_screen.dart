@@ -53,7 +53,8 @@ class BreedListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => const Divider(),
       itemCount: groupedBreeds.keys.length,
       itemBuilder: (context, index) {
         final letter = groupedBreeds.keys.elementAt(index);

@@ -43,7 +43,8 @@ class SubBreedListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => const Divider(),
       itemCount: subBreeds.length,
       itemBuilder: (context, index) {
         return ListTile(

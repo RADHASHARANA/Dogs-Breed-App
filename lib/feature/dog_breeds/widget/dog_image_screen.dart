@@ -45,7 +45,7 @@ class DogImageScreen extends StatelessWidget {
                       minScale: 0.5,
                       child: Image.network(
                         state.breedImageUrl,
-                        fit: BoxFit.contain,
+                        fit: BoxFit.fill,
                         width: double.infinity,
                         height: double.infinity,
                       ),
