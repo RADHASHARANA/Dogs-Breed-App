@@ -95,3 +95,6 @@ Dogs-Breed-App is a Flutter application that provides information about various 
 
 ## Conclusion
     Dogs-Breed-App is a well-structured and well-tested Flutter application that provides a comprehensive and engaging experience for dog lovers. The app utilizes a BLoC architecture for state management, interacts with a backend API, and leverages the cached_network_image package for efficient image loading.
+
+    
+<video controls src="DogBreedsAppDemo.mp4" title="DogBreedsAppDemo"></video>
