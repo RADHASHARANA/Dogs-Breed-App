@@ -22,36 +22,31 @@ class DogImageScreen extends StatelessWidget {
           return StatusHandler(
             status: state.dogImageStatus,
             onSuccess: SafeArea(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.grey.shade900, // Darker gray
-                          Colors.grey.shade700, // Lighter gray
-                        ],
-                      ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.white10, // Darker gray
+                      Colors.white30, // Lighter gray
+                    ],
+                  ),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: InteractiveViewer(
+                    maxScale: 3.0,
+                    minScale: 0.5,
+                    child: Image.network(
+                      state.breedImageUrl,
+                      fit: BoxFit.fitWidth,
+                      width: double.infinity,
+                      height: double.infinity,
                     ),
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: InteractiveViewer(
-                      maxScale: 3.0,
-                      minScale: 0.5,
-                      child: Image.network(
-                        state.breedImageUrl,
-                        fit: BoxFit.fill,
-                        width: double.infinity,
-                        height: double.infinity,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
             error: state.subbreedListerror,

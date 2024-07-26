@@ -54,6 +54,7 @@ class BreedListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
       separatorBuilder: (context, index) => const Divider(),
       itemCount: groupedBreeds.keys.length,
       itemBuilder: (context, index) {
@@ -90,13 +91,23 @@ class BreedSectionWidget extends StatelessWidget {
             ),
           ),
         ),
-        ListView.builder(
+        ListView.separated(
+          separatorBuilder: (context, index) => Divider(
+            color: Colors.grey.shade200,
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 0),
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: breeds.length,
           itemBuilder: (context, breedIndex) {
             return ListTile(
               title: Text(breeds[breedIndex]),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              tileColor: Colors.grey.shade100,
               onTap: () {
                 context
                     .read<DogBreedsCubit>()

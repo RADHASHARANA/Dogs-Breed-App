@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_networking/feature/common_widgets/status_handler.dart';
+import 'package:flutter_networking/utils/strings_utils.dart';
 
 import '../bloc/dog_breeds_bloc.dart';
 import '../bloc/dog_breeds_state.dart';
@@ -13,7 +14,7 @@ class DogBreedDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(breedName),
+        title: Text(breedName.capitalizeFirstChar()),
       ),
       body: BlocBuilder<DogBreedsCubit, DogBreedsState>(
         builder: (context, state) {
@@ -44,11 +45,19 @@ class SubBreedListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) => Divider(
+        color: Colors.grey.shade200,
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
       itemCount: subBreeds.length,
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(subBreeds[index]),
+          tileColor: Colors.grey.shade100,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
           onTap: () {
             context.read<DogBreedsCubit>().fetchDogImageDetails(breed);
             final Widget child = BlocProvider<DogBreedsCubit>.value(
