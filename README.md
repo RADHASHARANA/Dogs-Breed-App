@@ -93,13 +93,5 @@ Dogs-Breed-App is a Flutter application that provides information about various 
     The app includes unit tests for the DogBreedsCubit using mocktail to mock the DogBreedsRepo and verify state transitions.
 
 
-## Future Enhancements
-### Search Functionality: 
-    Allow users to search for specific breeds.
-### User Profiles: 
-    Implement user profiles to allow users to save their favorite breeds.
-### Offline Mode: 
-    Enable offline access to breed data.
-
 ## Conclusion
     Dogs-Breed-App is a well-structured and well-tested Flutter application that provides a comprehensive and engaging experience for dog lovers. The app utilizes a BLoC architecture for state management, interacts with a backend API, and leverages the cached_network_image package for efficient image loading.
