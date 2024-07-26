@@ -14,18 +14,26 @@ Dogs-Breed-App is a comprehensive mobile application designed to help dog lovers
 ### Interactive Image Viewer: 
     Zoom and pan the breed images for a closer look.
 
-Launch the App: Open the Dogs-Breed-App on your mobile device.
-Browse Breeds: Scroll through the list of dog breeds categorized alphabetically.
-Explore Details: Tap on a breed to view its detailed information.
-View Sub-Breeds: If a breed has sub-breeds, you can tap on them to learn more.
-View Images: Tap on the image icon to view a full-screen image of the breed.
-Zoom and Pan: Use the interactive image viewer to zoom and pan the image for a closer look.
-Benefits
+### Launch the App: 
+    Open the Dogs-Breed-App on your mobile device.
+### Browse Breeds: 
+     Scroll through the list of dog breeds categorized alphabetically.
+### Explore Details: 
+    Tap on a breed to view its detailed information.
+### View Sub-Breeds: 
+    If a breed has sub-breeds, you can tap on them to learn more.
+#### View Images: 
+    Tap on the image icon to view a full-screen image of the breed.
+### Zoom and Pan:
+    Use the interactive image viewer to zoom and pan the image for a closer look.
 
-Comprehensive Information: Access detailed information about a wide range of dog breeds.
-Visual Appeal: Enjoy stunning images and a visually appealing grayscale gradient background.
-Interactive Experience: Zoom and pan images for a closer look.
-User-Friendly Interface: Easy to navigate and use.
+## Benefits
+### Comprehensive Information: 
+    Access detailed information about a wide range of dog breeds.
+### Interactive Experience: 
+    Zoom and pan images for a closer look.
+### User-Friendly Interface: 
+    Easy to navigate and use.
 
 
 # Technical Documentation for Dogs-Breed-App
